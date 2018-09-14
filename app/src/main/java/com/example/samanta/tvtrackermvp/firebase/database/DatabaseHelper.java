@@ -44,4 +44,6 @@ public interface DatabaseHelper {
     void getFollowedUsers(String userID, FollowedUsersCallback followedUsersCallback);
 
     void followUser(String currentUserID, User user, FollowUserCallback followUserCallback);
+
+    void unfollowUser(User user, String userID, UnfollowUserCallback unfollowUserCallback);
 }

@@ -502,6 +502,7 @@ public class DatabaseHelperImpl implements DatabaseHelper {
                         followedUser.setStatus(ds.getValue(User.class).getStatus());
                         followedUser.setUsername(ds.getValue(User.class).getUsername());
                         followedUser.setFollowed(ds.getValue(User.class).getFollowed());
+                        followedUser.setUserID(ds.getValue(User.class).getUserID());
 
                         followedUsers.add(followedUser);
 
@@ -536,6 +537,7 @@ public class DatabaseHelperImpl implements DatabaseHelper {
                     followUserReference.child("image").setValue(user.getImage());
                     followUserReference.child("status").setValue(user.getStatus());
                     followUserReference.child("userID").setValue(user.getUserID());
+                    followUserReference.child("followed").setValue("true");
                     followUserCallback.onFollowUserCallback(false);
                 }
             }
@@ -545,6 +547,22 @@ public class DatabaseHelperImpl implements DatabaseHelper {
 
             }
         });
+
+    }
+
+    @Override
+    public void unfollowUser(User user, String userID, UnfollowUserCallback unfollowUserCallback) {
+
+        DatabaseReference usersReference = reference.child("followedUsers")
+                .child(userID)
+                .child(user.getUserID());
+
+        try {
+            usersReference.removeValue();
+            unfollowUserCallback.onUnfollowUserCallback(true);
+        }catch (DatabaseException databaseExepction){
+            unfollowUserCallback.onUnfollowUserCallback(false);
+        }
 
     }
 }

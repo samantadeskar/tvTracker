@@ -49,4 +49,5 @@
     <dimen name="height_30">30dp</dimen>
     <dimen name="padding_10">10dp</dimen>
     <dimen name="width_height_150">150dp</dimen>
+    <dimen name="height_23">23dp</dimen>
 </resources>

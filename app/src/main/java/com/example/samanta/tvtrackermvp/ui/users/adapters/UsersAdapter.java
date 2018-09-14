@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -86,6 +87,8 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
         ImageButton imageButtonFollowUser;
         @BindView(R.id.textViewFollowedUser)
         TextView textViewFollowedUser;
+        @BindView(R.id.buttonUnfollowUser)
+        Button buttonUnfollowUser;
 
 
 
@@ -121,6 +124,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
             else {
                 textViewFollowedUser.setVisibility(View.INVISIBLE);
                 imageButtonFollowUser.setVisibility(View.VISIBLE);
+                buttonUnfollowUser.setVisibility(View.INVISIBLE);
             }
 
         }

@@ -5,6 +5,7 @@ import com.example.samanta.tvtrackermvp.firebase.authentication.AuthenticationHe
 import com.example.samanta.tvtrackermvp.firebase.database.DatabaseHelper;
 import com.example.samanta.tvtrackermvp.firebase.database.DatabaseHelperImpl;
 import com.example.samanta.tvtrackermvp.firebase.database.FollowedUsersCallback;
+import com.example.samanta.tvtrackermvp.firebase.database.UnfollowUserCallback;
 import com.example.samanta.tvtrackermvp.pojo.User;
 import com.example.samanta.tvtrackermvp.ui.users.fragments.FollowedUsersView;
 
@@ -33,5 +34,22 @@ public class FollowedUsersPresenterImpl implements FollowedUsersPresenter {
             }
         });
 
+    }
+
+    @Override
+    public void unfollowUser(final User user) {
+        String userID = authenticationHelper.getCurrentUserID();
+        databaseHelper.unfollowUser(user, userID, new UnfollowUserCallback() {
+            @Override
+            public void onUnfollowUserCallback(boolean isUnfollowed) {
+                if(isUnfollowed){
+                    view.toastUnfollowed(user.getUsername());
+                    getFollowedUsers();
+                }
+                else {
+                    view.toastUnfollowError(user.getUsername());
+                }
+            }
+        });
     }
 }

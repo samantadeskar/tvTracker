@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.samanta.tvtrackermvp.R;
+import com.example.samanta.tvtrackermvp.listeners.FollowUserClickListener;
 import com.example.samanta.tvtrackermvp.listeners.UserClickListener;
 import com.example.samanta.tvtrackermvp.pojo.User;
 import com.example.samanta.tvtrackermvp.ui.users.fragments.FollowedUsersFragment;
@@ -27,12 +29,14 @@ public class FollowedUsersAdapter extends RecyclerView.Adapter<FollowedUsersAdap
 
     private UserClickListener userClickListener;
     private List<User> followedUsersList;
+    private FollowUserClickListener followUserClickListener;
 
 
-    public FollowedUsersAdapter(UserClickListener userClickListener) {
+    public FollowedUsersAdapter(UserClickListener userClickListener, FollowUserClickListener clickListener) {
 
         this.userClickListener = userClickListener;
         followedUsersList = new ArrayList<>();
+        this.followUserClickListener = clickListener;
     }
 
     public void setFollowedUsers(List<User> usersList) {
@@ -50,7 +54,7 @@ public class FollowedUsersAdapter extends RecyclerView.Adapter<FollowedUsersAdap
     public FollowedUsersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.user_item,parent,false);
-        return new FollowedUsersViewHolder(view,userClickListener);
+        return new FollowedUsersViewHolder(view,userClickListener, followUserClickListener);
     }
 
     @Override
@@ -76,9 +80,13 @@ public class FollowedUsersAdapter extends RecyclerView.Adapter<FollowedUsersAdap
         ImageButton imageButtonFollowUser;
         @BindView(R.id.textViewFollowedUser)
         TextView textViewFollowedUser;
+        @BindView(R.id.buttonUnfollowUser)
+        Button buttonUnfollowUser;
 
 
-        public FollowedUsersViewHolder(View itemView, UserClickListener userClickListener) {
+        public FollowedUsersViewHolder(View itemView,
+                                       UserClickListener userClickListener,
+                                       FollowUserClickListener clickListener) {
             super(itemView);
             ButterKnife.bind(this,itemView);
         }
@@ -86,6 +94,11 @@ public class FollowedUsersAdapter extends RecyclerView.Adapter<FollowedUsersAdap
         @OnClick
         public void onUserClick(){
             userClickListener.onClick(followedUsersList.get(getAdapterPosition()));
+        }
+
+        @OnClick(R.id.buttonUnfollowUser)
+        public void onButtonClick(){
+            followUserClickListener.onButtonClick(followedUsersList.get(getAdapterPosition()));
         }
 
         public void bind(User user){
@@ -98,7 +111,7 @@ public class FollowedUsersAdapter extends RecyclerView.Adapter<FollowedUsersAdap
 
                 textViewFollowedUser.setVisibility(View.INVISIBLE);
                 imageButtonFollowUser.setVisibility(View.INVISIBLE);
-
+                buttonUnfollowUser.setVisibility(View.VISIBLE);
         }
     }
 }

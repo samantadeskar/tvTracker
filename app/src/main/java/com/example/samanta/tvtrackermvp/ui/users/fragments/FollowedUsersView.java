@@ -8,4 +8,7 @@ public interface FollowedUsersView {
 
     void setFollowedUsers(List<User> usersList);
 
+    void toastUnfollowed(String username);
+
+    void toastUnfollowError(String username);
 }
