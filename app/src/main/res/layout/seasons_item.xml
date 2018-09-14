@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/cardView_margin"
+    android:layout_marginStart="@dimen/cardView_margin"
+    android:layout_marginTop="@dimen/cardView_margin">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textViewSeasonName"
+            android:layout_width="@dimen/width_100"
+            android:layout_height="@dimen/height_30"
+            android:layout_marginStart="@dimen/cardView_margin"
+            android:textSize="@dimen/textSize_20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="season 1" />
+
+        <TextView
+            android:id="@+id/textViewNumberOfEpisodes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/cardView_margin"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:text="Number of episodes: 23" />
+
+        <TextView
+            android:id="@+id/textViewReleaseDate"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="@dimen/cardView_margin"
+            android:layout_marginStart="@dimen/cardView_margin"
+            android:layout_marginTop="@dimen/cardView_margin"
+            android:alpha="0.7"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewSeasonName"
+            tools:text="2018" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>
